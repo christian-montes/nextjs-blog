@@ -26,7 +26,7 @@ export function getSortedPostsData() {
         // returning an object with two properties
         return {
             id,
-            ...matterResult.data
+            ...(matterResult.data as { date: string; title: string })
         }
     })
 
@@ -62,7 +62,7 @@ export function getAllPostsId() {
     })
 }
 
-export async function getPostData(id) {
+export async function getPostData(id: string) {
     const fullPath = path.join(postsDirectory, `${id}.md`);
     const fileContents = fs.readFileSync(fullPath, 'utf-8');
 
@@ -81,6 +81,6 @@ export async function getPostData(id) {
     return {
         id,
         contentHTML,
-        ...matterResult.data
+        ...(matterResult.data as { date: string; title: string})
     }
 }
